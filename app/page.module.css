@@ -166,3 +166,124 @@ a.secondary {
     filter: invert();
   }
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-alpha-200);
+  font-family: var(--font-geist-mono);
+  font-size: 14px;
+  line-height: 24px;
+  background-color: transparent;
+  color: var(--foreground);
+  resize: vertical;
+}
+
+.mcqContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.optionButton {
+  appearance: none;
+  border-radius: 8px;
+  height: auto;
+  padding: 16px 20px;
+  border: 1px solid var(--gray-alpha-200);
+  background-color: transparent;
+  color: var(--foreground);
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.optionButton:hover:not(:disabled) {
+  background-color: var(--gray-alpha-100);
+}
+
+.optionButton.correct {
+  background-color: #2f9e44;
+  color: white;
+  border-color: #2f9e44;
+}
+
+.optionButton.incorrect {
+  background-color: #d9480f;
+  color: white;
+  border-color: #d9480f;
+}
+
+.optionButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.nextButton {
+  appearance: none;
+  border-radius: 128px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  background: var(--foreground);
+  color: var(--background);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  align-self: flex-end;
+}
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.primary {
+  appearance: none;
+  border-radius: 128px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  border: 1px solid transparent;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  background: var(--foreground);
+  color: var(--background);
+  gap: 8px;
+}
+
+.primary:hover {
+  background: var(--button-primary-hover);
+}
