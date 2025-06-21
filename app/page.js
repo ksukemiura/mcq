@@ -10,6 +10,7 @@ export default function Home() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export default function Home() {
       setSelectedOption(null);
       setIsAnswered(false);
       setScore(0);
+      setUserAnswers([]);
     } catch (error) {
       console.error(error);
       // Handle error state in UI
@@ -41,6 +43,9 @@ export default function Home() {
     if (isAnswered) return;
 
     setSelectedOption(option);
+    const newUserAnswers = [...userAnswers];
+    newUserAnswers[currentQuestionIndex] = option;
+    setUserAnswers(newUserAnswers);
     setIsAnswered(true);
     const correctOption = mcqs[currentQuestionIndex].answer;
     // The answer is 'A', 'B', 'C', etc. The options are 0-indexed.
@@ -96,7 +101,7 @@ export default function Home() {
                 onClick={handleNextQuestion}
                 className={styles.nextButton}
               >
-                Next
+                {currentQuestionIndex < mcqs.length - 1 ? "Next" : "Finish"}
               </button>
             )}
           </div>
@@ -114,8 +119,47 @@ export default function Home() {
             <p>
               Your score: {score} out of {mcqs.length}
             </p>
+            <div className={styles.summaryContainer}>
+              <h3>Quiz Summary</h3>
+              {mcqs.map((mcq, index) => {
+                const correctOptionLetter = mcq.answer;
+                const correctOptionIndex =
+                  correctOptionLetter.charCodeAt(0) - "A".charCodeAt(0);
+                const correctOption = mcq.options[correctOptionIndex];
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === correctOption;
+
+                return (
+                  <div key={index} className={styles.summaryItem}>
+                    <p>
+                      <strong>Question {index + 1}</strong>: {mcq.question}
+                    </p>
+                    <p
+                      className={
+                        isCorrect ? styles.correctAnswer : styles.wrongAnswer
+                      }
+                    >
+                      Your answer: {userAnswer}{" "}
+                      {isCorrect ? "(Correct)" : "(Wrong)"}
+                    </p>
+                    {!isCorrect && (
+                      <p className={styles.correctAnswer}>
+                        Correct answer: {correctOption}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
             <button
-              onClick={() => setMcqs([])}
+              onClick={() => {
+                setMcqs([]);
+                setCurrentQuestionIndex(0);
+                setSelectedOption(null);
+                setIsAnswered(false);
+                setScore(0);
+                setUserAnswers([]);
+              }}
               className={styles.primary}
             >
               Start Over
