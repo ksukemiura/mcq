@@ -179,7 +179,8 @@ export default function Home() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter your multiple-choice questions text here..."
-            rows={10}
+            rows={20}
+            cols={100}
           />
           <button type="submit" className={styles.primary}>
             Start Quiz
