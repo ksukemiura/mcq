@@ -38,7 +38,6 @@ async function text2json(questions) {
       },
     },
   });
-  console.log(JSON.parse(response.text));
   return JSON.parse(response.text);
 }
 
