@@ -2,7 +2,7 @@ import { GoogleGenAI, Type } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-async function text2json(questions) {
+async function text2json(text) {
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: `
@@ -10,7 +10,7 @@ async function text2json(questions) {
       For answer, provide the index (0-based) of the correct option from the options array.
 
       Questions:
-      ${questions}
+      ${text}
     `,
     config: {
       responseMimeType: "application/json",
