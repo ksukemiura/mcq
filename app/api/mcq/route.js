@@ -7,7 +7,7 @@ async function text2json(questions) {
     model: "gemini-2.5-flash",
     contents: `
       Format the following multiple-choice question text into a JSON format.
-      For answer, provide the letter corresponding to the correct option.
+      For answer, provide the index (0-based) of the correct option from the options array.
 
       Questions:
       ${questions}
@@ -29,14 +29,16 @@ async function text2json(questions) {
               },
             },
             answer: {
-              type: Type.STRING,
+              type: Type.INTEGER,
             },
           },
           propertyOrdering: ["question", "options", "answer"],
+          required: ["question", "options", "answer"],
         },
       },
     },
   });
+  console.log(JSON.parse(response.text));
   return JSON.parse(response.text);
 }
 

@@ -47,9 +47,7 @@ export default function Home() {
     newUserAnswers[currentQuestionIndex] = option;
     setUserAnswers(newUserAnswers);
     setIsAnswered(true);
-    const correctOption = mcqs[currentQuestionIndex].answer;
-    // The answer is 'A', 'B', 'C', etc. The options are 0-indexed.
-    const correctOptionIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
+    const correctOptionIndex = mcqs[currentQuestionIndex].answer;
     if (mcqs[currentQuestionIndex].options[correctOptionIndex] === option) {
       setScore(score + 1);
     }
@@ -63,8 +61,7 @@ export default function Home() {
 
   if (mcqs.length > 0 && currentQuestionIndex < mcqs.length) {
     const currentQuestion = mcqs[currentQuestionIndex];
-    const correctOption = currentQuestion.answer;
-    const correctOptionIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
+    const correctOptionIndex = currentQuestion.answer;
 
     return (
       <div className={styles.page}>
@@ -122,9 +119,7 @@ export default function Home() {
             <div className={styles.summaryContainer}>
               <h3>Quiz Summary</h3>
               {mcqs.map((mcq, index) => {
-                const correctOptionLetter = mcq.answer;
-                const correctOptionIndex =
-                  correctOptionLetter.charCodeAt(0) - "A".charCodeAt(0);
+                const correctOptionIndex = mcq.answer;
                 const correctOption = mcq.options[correctOptionIndex];
                 const userAnswer = userAnswers[index];
                 const isCorrect = userAnswer === correctOption;
